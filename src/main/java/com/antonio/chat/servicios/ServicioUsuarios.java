@@ -20,6 +20,8 @@ public class ServicioUsuarios {
         return repositorio.findById(id);
     }
 
+    public Usuario findByUsername(String username){return repositorio.findByUsername(username);}
+
     public Usuario save(Usuario usuario){
         repositorio.save(usuario);
         return usuario;

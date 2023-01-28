@@ -1,6 +1,7 @@
 package com.antonio.chat.servicios;
 
 import com.antonio.chat.modelo.Mensaje;
+import com.antonio.chat.modelo.Usuario;
 import com.antonio.chat.repositorios.RepositorioMensajes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class ServicioMensajes {
 
     public Mensaje findById(long id){
         return repositorio.findById(id);
+    }
+
+    public List<Mensaje> findByEmisorAndDestinatario(Usuario emisor, Usuario destinatario){
+        return repositorio.findByEmisorAndDestinatario(emisor, destinatario);
     }
 
     public Mensaje save(Mensaje mensaje){

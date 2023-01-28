@@ -11,7 +11,8 @@
     <div class="row" th:each="usuario:${lista}">
         <div class="col-1" th:text="${usuario.id}">
         </div>
-        <div class="col-4" th:text="${usuario.username}">
+        <div class="col-4">
+            <a th:href="'/chat/' + ${usuario.id}"><span th:text="${usuario.username}"></span></a>
         </div>
     </div>
 </div>

@@ -24,4 +24,11 @@ public class Mensaje {
     public Mensaje(){
         fecha=LocalDateTime.now();
     }
+
+    public Mensaje(Usuario emisor, Usuario destinatario, String contenido){
+        this.fecha=LocalDateTime.now();
+        this.emisor=emisor;
+        this.destinatario=destinatario;
+        this.contenido=contenido;
+    }
 }

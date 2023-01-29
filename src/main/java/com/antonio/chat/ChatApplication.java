@@ -24,9 +24,10 @@ public class ChatApplication {
 	CommandLineRunner commandLineRunner(ServicioUsuarios servicioUsuarios){
 		return args -> {
 			if(servicioUsuarios.findAll().size()<1) {
-				servicioUsuarios.save(new Usuario("antonio", "antonio@antonio.com"));
+				servicioUsuarios.save(new Usuario("antonio", "antonio@antonio.com", "https://i.pravatar.cc/150?u=antonio@antonio.com"));
 				for (int i = 0; i < 10; i++) {
-					servicioUsuarios.save(new Usuario("María " + i, "maria" + i + "@benito.com"));
+					String correo="maria" + i + "@benito.com";
+					servicioUsuarios.save(new Usuario("María " + i, correo, "https://i.pravatar.cc/150?u=" + correo));
 				}
 			}
 		};

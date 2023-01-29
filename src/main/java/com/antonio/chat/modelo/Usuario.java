@@ -29,4 +29,10 @@ public class Usuario {
         this.username=username;
         this.email=email;
     }
+
+    public Usuario(String username, String email, String avatar){
+        this.username=username;
+        this.email=email;
+        this.avatar=avatar;
+    }
 }

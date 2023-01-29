@@ -18,6 +18,7 @@ public class Mensaje {
     @ManyToOne
     @JoinColumn(name="destinatario_id")
     private Usuario destinatario;
+    @Column(columnDefinition = "TEXT")
     private String contenido;
     private LocalDateTime fecha;
 

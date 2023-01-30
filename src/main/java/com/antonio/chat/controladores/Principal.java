@@ -5,6 +5,7 @@ import com.antonio.chat.modelo.Usuario;
 import com.antonio.chat.servicios.ServicioMensajes;
 import com.antonio.chat.servicios.ServicioUsuarios;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,21 +27,32 @@ public class Principal {
 
     @GetMapping("/")
     public String principal(Model model){
-        //Recupero la lista de usuarios y la mando a la plantilla
+        //Recupero la lista de usuarios y la mando a la plantilla para decir quién soy
         model.addAttribute("lista", servicioUsuarios.findAll());
-        return "index";
+        return "identificar";
     }
 
+    @GetMapping("/destinatario")
+    public String destino(Model model){
+        //Recupero la lista de usuarios y la mando a la plantilla para decir quién soy
+        model.addAttribute("lista", servicioUsuarios.findAll());
+        return "destinatario";
+    }
+
+
     @GetMapping("/elegir/{id}")
-    public String elegir(@PathVariable long id, Model model){
-        return "redirect:/";
+    public String elegir(@PathVariable long id, Model model, HttpSession request){
+        //Selecciono y guardo en una variable de sesión el usuario actual, el que envía los mensajes
+        request.setAttribute("idActual", servicioUsuarios.findById(id).getId());
+        System.out.println(request.getAttribute("idActual"));
+        return "redirect:/destinatario";
     }
 
     @GetMapping("/chat/{id}")
-    public String chat(@PathVariable long id, Model model){
+    public String chat(@PathVariable long id, Model model, HttpSession request){
 
-        //Envío a la vista el usuario actual y el receptor al que le quiere enviar mensajes
-        Usuario actual=servicioUsuarios.findByUsername("antonio");
+        //Envío a la vista el usuario actual (variable de sesión) y el receptor al que le quiere enviar mensajes
+        Usuario actual=servicioUsuarios.findById((long) request.getAttribute("idActual"));
         Usuario destinatario=servicioUsuarios.findById(id);
         model.addAttribute("actual", actual);  //Esto después lo "cogeremos" de Spring Security
         model.addAttribute("receptor", destinatario);

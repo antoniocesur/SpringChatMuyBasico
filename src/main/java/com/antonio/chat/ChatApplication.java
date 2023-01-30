@@ -42,9 +42,11 @@ public class ChatApplication {
 				Usuario maria1=servicioUsuarios.findByUsername("María 1");
 				Faker faker = new Faker(new Locale("es-ES"));
 				for (int i = 0; i < 10; i++) {
+					//El usuario antonio envía un mensaje a María
 					Mensaje mensaje=new Mensaje(antonio, maria1, faker.chuckNorris().fact());
 					mensaje.setFecha(LocalDate.now().minusDays(i).atStartOfDay());
 					servicio.save(mensaje);
+					//Y viceversa
 					Mensaje mensaje2=new Mensaje(maria1, antonio, faker.backToTheFuture().quote());
 					mensaje2.setFecha(LocalDate.now().minusDays(i).atStartOfDay());
 					servicio.save(mensaje2);
